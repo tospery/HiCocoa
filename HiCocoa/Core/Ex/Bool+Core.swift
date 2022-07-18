@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+public protocol BooleanType {
+    var boolValue: Bool { get }
+}
+
+extension Bool: BooleanType {
+    public var boolValue: Bool { return self }
+}
