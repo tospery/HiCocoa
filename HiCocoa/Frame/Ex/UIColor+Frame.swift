@@ -62,8 +62,8 @@ public extension UIColor {
         themeService.type.associatedObject.borderColor
     }
     
-    static var corner: UIColor {
-        themeService.type.associatedObject.cornerColor
+    static var spacer: UIColor {
+        themeService.type.associatedObject.spacerColor
     }
 
     static var separator: UIColor {
@@ -74,40 +74,8 @@ public extension UIColor {
         themeService.type.associatedObject.indicatorColor
     }
     
-    static var special1: UIColor {
-        themeService.type.associatedObject.special1Color
-    }
-
-    static var special2: UIColor {
-        themeService.type.associatedObject.special2Color
-    }
-
-    static var special3: UIColor {
-        themeService.type.associatedObject.special3Color
-    }
-    
-    static var special4: UIColor {
-        themeService.type.associatedObject.special4Color
-    }
-    
-    static var special5: UIColor {
-        themeService.type.associatedObject.special5Color
-    }
-    
-    static var special6: UIColor {
-        themeService.type.associatedObject.special6Color
-    }
-    
-    static var special7: UIColor {
-        themeService.type.associatedObject.special7Color
-    }
-    
-    static var special8: UIColor {
-        themeService.type.associatedObject.special8Color
-    }
-    
-    static var special9: UIColor {
-        themeService.type.associatedObject.special9Color
+    static func special(with key: String) -> UIColor? {
+        themeService.type.associatedObject.specialColors[key]
     }
     
     func image(size: CGSize = .init(100)) -> UIImage {
