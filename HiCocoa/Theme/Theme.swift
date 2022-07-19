@@ -1,8 +1,8 @@
 //
 //  Theme.swift
-//  SWFrame
+//  HiCocoa
 //
-//  Created by liaoya on 2021/4/26.
+//  Created by liaoya on 2022/7/19.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ public let themeService = ThemeType.service(initial: .current)
 
 /// 假设从白到黑值为：0~9
 public protocol Theme {
-    var clearColor: UIColor { get }                             // 透明
+    // var clearColor: UIColor { get }                          // 透明
     var backgroundColor: UIColor { get }                        // 背景
     var foregroundColor: UIColor { get }                        // 前景
     var lightColor: UIColor { get }                             // 浅色
@@ -22,22 +22,14 @@ public protocol Theme {
     var primaryColor: UIColor { get }                           // 主色（如：红色）
     var secondaryColor: UIColor { get }                         // 次色（如：蓝色）
     var titleColor: UIColor { get }                             // 标题
-    var bodyColor: UIColor { get }                           // 内容
+    var bodyColor: UIColor { get }                              // 内容
     var headerColor: UIColor { get }                            // 头部
     var footerColor: UIColor { get }                            // 尾部
-    var borderColor: UIColor { get }                            // 外边框
-    var cornerColor: UIColor { get }                            // 内边框
+    var borderColor: UIColor { get }                            // 边框
+    var spacerColor: UIColor { get }                            // 空隙
     var separatorColor: UIColor { get }                         // 分隔条
     var indicatorColor: UIColor { get }                         // 指示器
-    var special1Color: UIColor { get }                          // 特殊1
-    var special2Color: UIColor { get }                          // 特殊2
-    var special3Color: UIColor { get }                          // 特殊3
-    var special4Color: UIColor { get }                          // 特殊4
-    var special5Color: UIColor { get }                          // 特殊5
-    var special6Color: UIColor { get }                          // 特殊6
-    var special7Color: UIColor { get }                          // 特殊7
-    var special8Color: UIColor { get }                          // 特殊8
-    var special9Color: UIColor { get }                          // 特殊9
+    var specialColors: [String: UIColor] { get }                // 特殊颜色
     var barStyle: UIBarStyle { get }
     var statusBarStyle: UIStatusBarStyle { get }
     var keyboardAppearance: UIKeyboardAppearance { get }
@@ -95,7 +87,6 @@ public enum ThemeType: ThemeProvider {
     public static var current: ThemeType {
         let defaults = UserDefaults.standard
         let isDark = defaults.bool(forKey: Parameter.isDark)
-        let hexString = defaults.string(forKey: Parameter.primaryColor)
         var color: UIColor?
         if let string = defaults.string(forKey: Parameter.primaryColor),
            let value = UIColor.init(hexString: string) {
