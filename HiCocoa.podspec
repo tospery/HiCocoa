@@ -23,4 +23,12 @@ Pod::Spec.new do |s|
 	ss.dependency 'ObjectMapper-JX', '4.2.0-v1'
 	ss.dependency 'SwifterSwift/SwiftStdlib', '5.2.0'
   end
+  
+  s.subspec 'Network' do |ss|
+    ss.source_files = 'HiCocoa/Network/**/*'
+  	ss.dependency 'HiCocoa/Core'
+  	ss.dependency 'RxRelay', '6.2.0'
+  	ss.dependency 'Moya/RxSwift', '15.0.0'
+  	ss.dependency 'SwifterSwift/Foundation', '5.2.0'
+  end
 end

@@ -7,6 +7,9 @@
 
 import Foundation
 
+//        NSURLErrorTimedOut(-1001): 请求超时
+//        NSURLErrorCannotConnectToHost(-1004): 找不到服务
+//        NSURLErrorDataNotAllowed(-1020): 网络不可用
 public struct ErrorCode {
     public static let ok                        = 200
     public static let serverUnableConnect       = -10001
@@ -27,8 +30,8 @@ public enum HiError: Error {
     case navigation
     case dataFormat
     case listIsEmpty
-    case userNotLoginedIn
-    case userLoginExpired
+    case userNotLoginedIn   // 对应HTTP的401
+    case userLoginExpired   // 对应HTTP的403
     case networkNotConnected
     case networkNotReachable
     case server(Int, String?, [String: Any]?)
@@ -191,10 +194,10 @@ extension HiError {
 //    public var isListIsEmpty: Bool {
 //        self == .listIsEmpty
 //    }
-//
-//    public var isNotLoginedIn: Bool {
-//        self == .userNotLoginedIn
-//    }
+
+    public var isNeedLogin: Bool {
+        self == .userNotLoginedIn || self == .userLoginExpired
+    }
     
     public func isServerError(withCode errorCode: Int) -> Bool {
         if case let .server(code, _, _) = self {
