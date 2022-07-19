@@ -1,21 +1,21 @@
-////
-////  SectionItemValueType.swift
-////  SWFrame
-////
-////  Created by liaoya on 2021/5/24.
-////
 //
-//import Foundation
+//  SectionItemValueType.swift
+//  HiCocoa
 //
-//public protocol SectionItemValueType {
-//    var title: String? { get }
-//    var image: UIImage? { get }
-//    var urlScheme: String? { get }
-//}
+//  Created by liaoya on 2022/7/19.
 //
-//extension SectionItemValueType {
-//    var title: String? { nil }
-//    var image: UIImage? { nil }
-//    var urlScheme: String? { nil }
-//}
-//
+
+import Foundation
+
+public protocol SectionItemValueType {
+    var title: String? { get }
+    var image: UIImage? { get }
+    var urlScheme: String? { get }
+}
+
+extension SectionItemValueType {
+    var title: String? { nil }
+    var image: UIImage? { nil }
+    var urlScheme: String? { nil }
+}
+

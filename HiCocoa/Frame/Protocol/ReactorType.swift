@@ -1,17 +1,17 @@
-////
-////  ReactorType.swift
-////  SWFrame
-////
-////  Created by 杨建祥 on 2020/4/5.
-////
 //
-//import UIKit
+//  ReactorType.swift
+//  HiCocoa
 //
-//public protocol ReactorType {
-//    
-//}
+//  Created by liaoya on 2022/7/19.
 //
-//public protocol WithModel {
-//    var model: ModelType { get }
-//    init(_ model: ModelType)
-//}
+
+import Foundation
+
+public protocol ReactorType {
+
+}
+
+public protocol WithModel {
+    var model: ModelType { get }
+    init(_ model: ModelType)
+}

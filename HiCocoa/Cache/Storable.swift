@@ -1,5 +1,5 @@
 //
-//  Cacheable.swift
+//  Storable.swift
 //  HiCocoa
 //
 //  Created by liaoya on 2022/7/19.
@@ -15,10 +15,10 @@ let archiver = try! Storage<String, String>.init(
 )
 
 // MARK: - 存储协议
-public protocol Cacheable: ModelType, Identifiable, Codable, Equatable {
+public protocol Storable: ModelType, Identifiable, Codable, Equatable {
 
-    // associatedtype Base: Cacheable where Base.Base == Base
-    // associatedtype Store: Cacheable
+    // associatedtype Base: Storable where Base.Base == Base
+    // associatedtype Store: Storable
 
     static func objectKey(id: String?) -> String
     static func arrayKey(page: String?) -> String
@@ -32,7 +32,7 @@ public protocol Cacheable: ModelType, Identifiable, Codable, Equatable {
     static func eraseObject(id: String?)
 }
 
-public extension Cacheable {
+public extension Storable {
 
     static func objectKey(id: String? = nil) -> String {
         var key = String(fullname: self)
