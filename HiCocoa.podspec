@@ -63,4 +63,23 @@ Pod::Spec.new do |s|
     end
   end
   
+  s.subspec 'Frame' do |ss|
+    ss.source_files = 'HiCocoa/Frame/**/*'
+	ss.dependency 'HiCocoa/Core'
+	ss.dependency 'HiCocoa/Cache'
+  	ss.dependency 'HiCocoa/Theme'
+	ss.dependency 'HiCocoa/Router'
+	ss.dependency 'HiCocoa/Network'
+  	ss.dependency 'HiCocoa/Resources'
+  	ss.dependency 'HiCocoa/Components/JSBridge'
+  	ss.dependency 'RxDataSources', '5.0.0'
+  	ss.dependency 'NSObject+Rx', '5.2.2'
+  	ss.dependency 'ReactorKit', '3.2.0'
+  	ss.dependency 'BonMot', '6.0.0'
+  	ss.dependency 'SwifterSwift', '5.2.0'
+  	ss.dependency 'Kingfisher', '6.3.1'
+  	ss.dependency 'DZNEmptyDataSet', '1.8.1'
+  	ss.dependency 'MJRefresh', '3.7.5'
+  end
+  
 end
