@@ -1,12 +1,12 @@
-////
-////  BaseTableItem.swift
-////  SWFrame
-////
-////  Created by liaoya on 2020/8/17.
-////
 //
-//import Foundation
+//  BaseTableItem.swift
+//  HiCocoa
 //
-//open class BaseTableItem: BaseItem {
-//    
-//}
+//  Created by 杨建祥 on 2022/7/19.
+//
+
+import Foundation
+
+open class BaseTableItem: BaseItem {
+    
+}

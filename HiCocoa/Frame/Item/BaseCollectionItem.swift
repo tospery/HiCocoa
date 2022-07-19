@@ -1,12 +1,12 @@
-////
-////  BaseCollectionItem.swift
-////  SWFrame
-////
-////  Created by 杨建祥 on 2020/4/10.
-////
 //
-//import Foundation
+//  BaseCollectionItem.swift
+//  HiCocoa
 //
-//open class BaseCollectionItem: BaseItem {
-//    
-//}
+//  Created by 杨建祥 on 2022/7/19.
+//
+
+import Foundation
+
+open class BaseCollectionItem: BaseItem {
+    
+}

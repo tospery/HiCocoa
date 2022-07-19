@@ -1,12 +1,12 @@
-////
-////  BaseCollectionReusableSupplementary.swift
-////  SWFrame.default-Components_JSBridge
-////
-////  Created by liaoya on 2022/3/9.
-////
 //
-//import Foundation
+//  BaseCollectionReusableSupplementary.swift
+//  HiCocoa
 //
-//open class BaseCollectionReusableSupplementary: BaseSupplementary {
-//    
-//}
+//  Created by 杨建祥 on 2022/7/19.
+//
+
+import Foundation
+
+open class BaseCollectionReusableSupplementary: BaseSupplementary {
+    
+}

@@ -1,12 +1,12 @@
-////
-////  BaseTableHeaderFooterSupplementary.swift
-////  SWFrame
-////
-////  Created by liaoya on 2022/4/11.
-////
 //
-//import Foundation
+//  BaseTableHeaderFooterSupplementary.swift
+//  HiCocoa
 //
-//open class BaseTableHeaderFooterSupplementary: BaseSupplementary {
-//    
-//}
+//  Created by 杨建祥 on 2022/7/19.
+//
+
+import Foundation
+
+open class BaseTableHeaderFooterSupplementary: BaseSupplementary {
+    
+}

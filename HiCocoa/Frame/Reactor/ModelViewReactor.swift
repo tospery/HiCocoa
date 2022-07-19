@@ -1,22 +1,22 @@
-////
-////  ModelViewReactor.swift
-////  SWFrame
-////
-////  Created by liaoya on 2020/8/5.
-////
 //
-//import UIKit
+//  ModelViewReactor.swift
+//  HiCocoa
 //
-//open class ModelViewReactor: ReactorType, WithModel, CustomStringConvertible {
+//  Created by 杨建祥 on 2022/7/19.
 //
-//    public let model: ModelType
-//    
-//    public required init(_ model: ModelType) {
-//        self.model = model
-//    }
-//    
-//    open var description: String {
-//        return self.model.description
-//    }
-//    
-//}
+
+import Foundation
+
+open class ModelViewReactor: ReactorType, WithModel, CustomStringConvertible {
+
+    public let model: ModelType
+    
+    public required init(_ model: ModelType) {
+        self.model = model
+    }
+    
+    open var description: String {
+        return self.model.description
+    }
+    
+}

@@ -1,22 +1,22 @@
-////
-////  CollectionFooterView.swift
-////  SWFrame.default-Components_JSBridge
-////
-////  Created by liaoya on 2022/3/9.
-////
 //
-//import UIKit
+//  CollectionFooterView.swift
+//  HiCocoa
 //
-//open class CollectionFooterView: BaseCollectionReusableView {
+//  Created by 杨建祥 on 2022/7/19.
 //
-//    public override init(frame: CGRect) {
-//        super.init(frame: frame)
-//    }
-//    
-//    required public init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    
-//    var kind: String { UICollectionView.elementKindSectionFooter }
-//    
-//}
+
+import UIKit
+
+open class CollectionFooterView: BaseCollectionReusableView {
+
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var kind: String { UICollectionView.elementKindSectionFooter }
+    
+}

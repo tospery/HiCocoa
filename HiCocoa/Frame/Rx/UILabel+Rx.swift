@@ -1,20 +1,20 @@
-////
-////  UILabel+Rx.swift
-////  SWFrame
-////
-////  Created by liaoya on 2021/5/25.
-////
 //
-//import UIKit
-//import RxCocoa
-//import RxSwift
+//  UILabel+Rx.swift
+//  HiCocoa
 //
-//extension Reactive where Base: UILabel {
+//  Created by 杨建祥 on 2022/7/19.
 //
-//    public var isHighlighted: Binder<Bool> {
-//        return Binder(self.base) { label, highlighted in
-//            label.isHighlighted = highlighted
-//        }
-//    }
-//
-//}
+
+import UIKit
+import RxCocoa
+import RxSwift
+
+extension Reactive where Base: UILabel {
+
+    public var isHighlighted: Binder<Bool> {
+        return Binder(self.base) { label, highlighted in
+            label.isHighlighted = highlighted
+        }
+    }
+
+}

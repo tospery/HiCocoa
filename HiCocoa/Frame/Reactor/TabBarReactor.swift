@@ -1,15 +1,15 @@
-////
-////  TabBarReactor.swift
-////  SWFrame
-////
-////  Created by 杨建祥 on 2020/5/25.
-////
 //
-//import UIKit
-//import RxSwift
-//import RxCocoa
-//import URLNavigator
+//  TabBarReactor.swift
+//  HiCocoa
 //
-//open class TabBarReactor: BaseViewReactor {
+//  Created by 杨建祥 on 2022/7/19.
 //
-//}
+
+import Foundation
+import RxSwift
+import RxCocoa
+import URLNavigator
+
+open class TabBarReactor: BaseViewReactor {
+
+}

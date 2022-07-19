@@ -1,12 +1,12 @@
-////
-////  CollectionViewReactor.swift
-////  SWFrame
-////
-////  Created by 杨建祥 on 2020/4/7.
-////
 //
-//import UIKit
+//  CollectionViewReactor.swift
+//  HiCocoa
 //
-//open class CollectionViewReactor: ScrollViewReactor {
+//  Created by 杨建祥 on 2022/7/19.
 //
-//}
+
+import Foundation
+
+open class CollectionViewReactor: ScrollViewReactor {
+
+}
