@@ -1,0 +1,181 @@
+//
+//  NavigatorType+Router.swift
+//  HiCocoa
+//
+//  Created by liaoya on 2022/7/19.
+//
+
+import Foundation
+import RxSwift
+import RxCocoa
+import URLNavigator
+
+var navigateBag = DisposeBag()
+
+public enum ForwardType: Int {
+    case push
+    case present
+    case open
+}
+
+public extension NavigatorType {
+
+    // MARK: - Forward（支持自动跳转登录页功能）
+    @discardableResult
+    func forward(
+        _ url: URLConvertible,
+//        path: String? = nil,
+//        queries: [String: String]? = nil,
+        context: Any? = nil,
+        from1: UINavigationControllerType? = nil,
+        from2: UIViewControllerType? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) -> Bool {
+        guard var url = url.urlValue else { return false }
+        guard let host = url.host else { return false }
+//        if let path = path {
+//            url.appendPathComponent(path)
+//        }
+//        if let queries = queries {
+//            url.appendQueryParameters(queries)
+//        }
+        
+        // 检测登录要求
+        var needLogin = false
+        var isLogined = true
+        let router = Router.shared
+        if let compatible = router as? RouterCompatible {
+            isLogined = compatible.isLogined()
+            if compatible.needLogin(host: host, path: url.path) {
+                needLogin = true
+            }
+        } else {
+            if host == .user {
+                needLogin = true
+            }
+        }
+        if needLogin && !isLogined {
+            (self as! Navigator).rx.open(
+                router.urlString(host: .login)
+            ).subscribe(onNext: { result in
+                logger.print("自动跳转登录页(数据): \(result)")
+            }, onError: { error in
+                logger.print("自动跳转登录页(错误): \(error)")
+            }, onCompleted: {
+                logger.print("自动跳转登录页(完成)")
+                self.forward(url, context: context, from1: from1, from2: from2, animated: animated, completion: completion)
+            }).disposed(by: navigateBag)
+            return true
+        }
+        
+        let forwardType = ForwardType.init(
+            rawValue: url.queryParameters.int(for: Parameter.forwardType) ?? 0
+        )
+        switch forwardType {
+        case .push:
+            if self.push(url, context: context, from: from1, animated: animated) != nil {
+                return true
+            }
+        case .present:
+            if self.present(url, context: context, wrap: NavigationController.self, from: from2, animated: animated, completion: completion) != nil {
+                return true
+            }
+        default: break
+        }
+        return self.open(url, context: context)
+    }
+    
+    @discardableResult
+    func rxForward(
+        _ url: URLConvertible,
+        context: Any? = nil,
+        from1: UINavigationControllerType? = nil,
+        from2: UIViewControllerType? = nil,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) -> Observable<Any> {
+        (self as! Navigator).rx.forward(url, context: context, from1: from1, from2: from2, animated: animated, completion: completion)
+    }
+
+    // MARK: - Toast
+    func toastMessage(_ message: String) {
+        guard !message.isEmpty else { return }
+        self.open(Router.shared.urlString(host: .toast, parameters: [
+            Parameter.message: message
+        ]))
+    }
+    
+    func showToastActivity() {
+        self.open(Router.shared.urlString(host: .toast, parameters: [
+            Parameter.active: true.string
+        ]))
+    }
+    
+    func hideToastActivity() {
+        self.open(Router.shared.urlString(host: .toast, parameters: [
+            Parameter.active: false.string
+        ]))
+    }
+    
+    // MARK: - Alert
+    func alert(_ title: String, _ message: String, _ actions: [AlertActionType]) {
+        self.open(
+            Router.shared.urlString(
+                host: .alert,
+                parameters: [
+                    Parameter.title: title,
+                    Parameter.message: message
+                ]),
+            context: [
+                Parameter.actions: actions
+            ]
+        )
+    }
+
+    func rxAlert(_ title: String, _ message: String, _ actions: [AlertActionType]) -> Observable<Any> {
+        (self as! Navigator).rx.open(
+            Router.shared.urlString(
+                host: .alert,
+                parameters: [
+                    Parameter.title: title,
+                    Parameter.message: message
+                ]),
+            context: [
+                Parameter.actions: actions
+            ]
+        )
+    }
+    
+    // MARK: - Sheet
+    
+    // MARK: - Popup
+    func popup(_ path: Router.Path, context: Any? = nil) {
+        self.open(
+            Router.shared.urlString(host: .popup, path: path),
+            context: context
+        )
+    }
+    
+    func rxPopup(_ path: Router.Path, context: Any? = nil) -> Observable<Any> {
+        (self as! Navigator).rx.open(
+            Router.shared.urlString(host: .popup, path: path),
+            context: context
+        )
+    }
+    
+    // MARK: - Login
+    func goLogin() {
+        self.open(Router.shared.urlString(host: .login))
+    }
+    
+//
+//    func sheet(_ path: Router.Path, context: Any? = nil) {
+//        self.navigator.open(Router.urlString(host: .sheet, path: path), context: context)
+//    }
+//
+//    func rxSheet(_ path: Router.Path, context: Any? = nil) -> Observable<Any> {
+//        (self.navigator as! Navigator).rx.open(Router.urlString(host: .sheet, path: path), context: context)
+//    }
+    
+}

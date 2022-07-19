@@ -34,14 +34,22 @@ Pod::Spec.new do |s|
   
   s.subspec 'Router' do |ss|
     ss.source_files = 'HiCocoa/Router/**/*'
-  	ss.dependency 'SWFrame/Core'
-  	ss.dependency 'URLNavigator', '2.3.0'
+  	ss.dependency 'HiCocoa/Core'
+	ss.dependency 'RxSwift', '~> 6.0'
+	ss.dependency 'RxCocoa', '~> 6.0'
+	ss.dependency 'URLNavigator', '2.3.0'
   end
   
   s.subspec 'Cache' do |ss|
     ss.source_files = 'HiCocoa/Cache/**/*'
-  	ss.dependency 'SWFrame/Core'
+  	ss.dependency 'HiCocoa/Core'
   	ss.dependency 'Cache', '6.0.0'
+  end
+  
+  s.subspec 'Theme' do |ss|
+    ss.source_files = 'HiCocoa/Theme/**/*'
+  	ss.dependency 'HiCocoa/Core'
+  	ss.dependency 'RxTheme', '6.0.0'
   end
   
   s.subspec 'Resources' do |ss|

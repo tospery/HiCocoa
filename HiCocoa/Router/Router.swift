@@ -1,13 +1,12 @@
 //
-//  MyRouter.swift
-//  SWFrame
+//  Router.swift
+//  HiCocoa
 //
-//  Created by liaoya on 2022/2/11.
+//  Created by liaoya on 2022/7/19.
 //
 
 import Foundation
 import URLNavigator
-import SwifterSwift
 
 public protocol RouterCompatible {
     
@@ -20,7 +19,7 @@ public protocol RouterCompatible {
     func forDetail(host: Router.Host) -> Bool
     
     func needLogin(host: Router.Host, path: Router.Path?) -> Bool
-    func customLogin(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType, _ url: URLConvertible, _ values: [String: Any], _ context: Any?) -> (Bool, Bool)
+    func customLogin(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType, _ url: URLConvertible, _ values: [String: Any], _ context: Any?) -> (Bool, Bool)
     
     func shouldRefresh(host: Router.Host, path: Router.Path?) -> Bool
     func shouldLoadMore(host: Router.Host, path: Router.Path?) -> Bool
@@ -28,9 +27,9 @@ public protocol RouterCompatible {
     func title(host: Router.Host, path: Router.Path?) -> String?
     func parameters(_ url: URLConvertible, _ values: [String: Any], _ context: Any?) -> [String: Any]?
     
-    func web(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType)
-    func page(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType)
-    func model(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType)
+    func web(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType)
+    func page(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType)
+    func model(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType)
     
 }
 
@@ -44,7 +43,7 @@ final public class Router {
     init() {
     }
     
-    public func initialize(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType) {
+    public func initialize(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType) {
         self.buildinMatch(provider, navigator)
         self.buildinWeb(provider, navigator)
         self.buildinLogin(provider, navigator)
@@ -55,7 +54,7 @@ final public class Router {
         }
     }
     
-    func buildinMatch(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType) {
+    func buildinMatch(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType) {
         navigator.matcher.valueConverters["type"] = { [weak self] pathComponents, index in
             guard let `self` = self else { return nil }
             if let compatible = self as? RouterCompatible {
@@ -71,7 +70,7 @@ final public class Router {
         }
     }
     
-    func buildinWeb(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType) {
+    func buildinWeb(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType) {
         let webFactory: ViewControllerFactory = { (url: URLNavigator.URLConvertible, _, context: Any?) in
             guard let url = url.urlValue else { return nil }
             // (1) 原生支持
@@ -89,17 +88,18 @@ final public class Router {
                 paramters[Parameter.title] = title
             }
 
-            if let reactorType = NSClassFromString("WebViewReactor") as? WebViewReactor.Type,
-               let controllerType = NSClassFromString("WebViewController") as? WebViewController.Type {
-                return controllerType.init(navigator, reactorType.init(provider, paramters))
-            }
-            return WebViewController(navigator, WebViewReactor(provider, paramters))
+//            if let reactorType = NSClassFromString("WebViewReactor") as? WebViewReactor.Type,
+//               let controllerType = NSClassFromString("WebViewController") as? WebViewController.Type {
+//                return controllerType.init(navigator, reactorType.init(provider, paramters))
+//            }
+//            return WebViewController(navigator, WebViewReactor(provider, paramters))
+            return nil
         }
         navigator.register("http://<path:_>", webFactory)
         navigator.register("https://<path:_>", webFactory)
     }
     
-    func buildinLogin(_ provider: SWFrame.ProviderType, _ navigator: NavigatorType) {
+    func buildinLogin(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType) {
         navigator.handle(self.urlPattern(host: .login)) { url, values, context in
             if let compatible = self as? RouterCompatible {
                 let result = compatible.customLogin(provider, navigator, url, values, context)
@@ -236,3 +236,4 @@ extension Router.Host {
 extension Router.Path {
     public static var list: Router.Path { "list" }
 }
+
