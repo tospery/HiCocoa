@@ -31,4 +31,28 @@ Pod::Spec.new do |s|
   	ss.dependency 'Moya/RxSwift', '15.0.0'
   	ss.dependency 'SwifterSwift/Foundation', '5.2.0'
   end
+  
+  s.subspec 'Router' do |ss|
+    ss.source_files = 'HiCocoa/Router/**/*'
+  	ss.dependency 'SWFrame/Core'
+  	ss.dependency 'URLNavigator', '2.3.0'
+  end
+  
+  s.subspec 'Cache' do |ss|
+    ss.source_files = 'HiCocoa/Cache/**/*'
+  	ss.dependency 'SWFrame/Core'
+  	ss.dependency 'Cache', '6.0.0'
+  end
+  
+  s.subspec 'Resources' do |ss|
+    ss.resource_bundles = {'Resources' => ['HiCocoa/Resources/*.*']}
+  end
+  
+  s.subspec 'Components' do |ss|
+    ss.subspec 'JSBridge' do |sss|
+      sss.source_files = 'HiCocoa/Components/JSBridge/**/*'
+  	  sss.frameworks = 'WebKit'
+    end
+  end
+  
 end
