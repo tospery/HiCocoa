@@ -26,6 +26,7 @@ public struct Parameter {
     public static let isDark                = "isDark"
     public static let isList                = "isList"
     public static let userid                = "userid"
+    public static let channel               = "channel"
     public static let keyword               = "keyword"
     public static let message               = "message"
     public static let actions               = "actions"

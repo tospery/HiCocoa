@@ -19,7 +19,7 @@ public protocol RouterCompatible {
     func forDetail(host: Router.Host) -> Bool
     
     func needLogin(host: Router.Host, path: Router.Path?) -> Bool
-    func customLogin(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType, _ url: URLConvertible, _ values: [String: Any], _ context: Any?) -> (Bool, Bool)
+    func customLogin(_ provider: HiCocoa.ProviderType, _ navigator: NavigatorType, _ url: URLConvertible, _ values: [String: Any], _ context: Any?) -> CustomLoginResult
     
     func shouldRefresh(host: Router.Host, path: Router.Path?) -> Bool
     func shouldLoadMore(host: Router.Host, path: Router.Path?) -> Bool
@@ -103,8 +103,8 @@ final public class Router {
         navigator.handle(self.urlPattern(host: .login)) { url, values, context in
             if let compatible = self as? RouterCompatible {
                 let result = compatible.customLogin(provider, navigator, url, values, context)
-                if result.0 {
-                    return result.1
+                if result.handled {
+                    return result.result
                 }
             }
             

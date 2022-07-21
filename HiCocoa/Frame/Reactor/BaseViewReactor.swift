@@ -20,7 +20,7 @@ open class BaseViewReactor: NSObject, ReactorType {
     public var disposeBag = DisposeBag()
     
     required public init(_ provider: ProviderType, _ parameters: [String: Any]?) {
-        self.host = parameters?.string(for: Parameter.host) ?? .user
+        self.host = parameters?.string(for: Parameter.host) ?? .login
         self.path = parameters?.string(for: Parameter.path)
         self.provider = provider
         self.parameters = parameters ?? [:]

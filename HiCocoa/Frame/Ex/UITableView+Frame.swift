@@ -10,7 +10,7 @@ import UIKit
 public extension UITableView {
     
     func emptyCell(for indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "SWFrame.UITableView.emptyCell"
+        let identifier = "HiCocoa.UITableView.emptyCell"
         self.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
         let cell = self.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         cell.isHidden = true

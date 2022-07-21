@@ -24,7 +24,7 @@ public class StringTransform: TransformType {
         } else if let string = value as? String {
             return string
         } else {
-            return (self as? Textable)?.toString(value)
+            return (self as? CustomStringConvertible)?.description
         }
     }
 

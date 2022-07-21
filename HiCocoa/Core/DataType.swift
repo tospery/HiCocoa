@@ -9,4 +9,5 @@ import Foundation
 
 // MARK: - 联合类型
 public typealias KVTuple = (key: Any, value: Any?)
-// public typealias SectionData = (header: ModelType?, items: [ModelType])
+public typealias SectionData = (header: ModelType?, items: [ModelType])
+public typealias CustomLoginResult = (handled: Bool, result: Bool)
